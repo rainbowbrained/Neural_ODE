@@ -1,6 +1,7 @@
 # Neural_ODE
 DL 2025 team project. Reproducible comparison of continuous‑time Neural ODE models against discrete‑time baselines (ResNet, RNN, LSTM) on irregular time‑series forecasting tasks.
 
+**Submission Format:** You will need to prepare a repository with the code for your solution and a report/presentation where we can quickly understand what problem you were solving, what difficulties arose, how you approached the solution, and what results you obtained (it is advisable to attach some graphs of losses/quality).
 
 ## ✅ Completed Tasks
 1. Generated synthetic dataset: A toy linear ODE system.
@@ -76,13 +77,10 @@ Download will auto‑trigger on first run and cache under `data/`.
 │   ├── datamodules/  # pytorch‑lightning data modules
 │   ├── utils/        # common helpers
 │   └── train.py      # entry point
-├── configs/          # Hydra YAML configs
-├── sweeps/           # hyper‑parameter search definitions
+├── configs/          # hyper‑parameters and other YAML configs
 ├── tests/            # unit & integration tests
-├── scripts/          # helper bash/nb scripts
 ├── results/          # artifacts & metrics (auto‑generated)
-├── environment.yml   # conda env spec
-└── LICENSE
+└── report.pdf        # project defense presentation
 ```
 
 ---

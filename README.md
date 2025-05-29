@@ -71,17 +71,21 @@ Download will auto‑trigger on first run and cache under `data/`.
 ## 3. Directory Layout
 
 ```
-├── data/             # raw & processed datasets
-├── src/
-│   ├── models/       # resnet.py, rnn.py, lstm.py, ode.py
-│   ├── datamodules/  # pytorch‑lightning data modules
-│   ├── utils/        # common helpers
-│   └── train.py      # entry point
-├── configs/          # hyper‑parameters and other YAML configs
-├── tests/            # unit & integration tests
-├── results/          # artifacts & metrics (auto‑generated)
+├── 1806.07366v5.pdf  # main paper
+│
+├── DL_NeuralODE.pdf      
+├── GRU_implementation.ipynb
+├── LSTM_MNIST_CIFAR-10_PhysioNet.ipynb
+├── NeuralODE.ipynb
+├── ResNet_CIFAR.ipynb
+├── ResNet_MNIST.ipynb
+│
+├── utils.py          
 └── report.pdf        # project defense presentation
 ```
+
+
+
 
 ---
 
@@ -102,8 +106,8 @@ Download will auto‑trigger on first run and cache under `data/`.
 
 | Member       | GitHub                | Responsibility                  |
 | ------------ | --------------------- | ------------------------------- |
-| @member1 Dmitry | ResNet Lead           | Deep residual baseline          |
-| @member2 Artemiy | RNN Lead              | GRU baseline                    |
-| @member3 Akmuhammed | LSTM Lead             | LSTM baseline                   |
-| @member4 Alina | ODE Lead              | Neural ODE module               |
+| @dpetrov835 Dmitry | ResNet Lead           | Deep residual baseline          |
+| @Sklaveman Artemiy | RNN Lead              | GRU baseline                    |
+| @Akmuhammet01 Akmuhammed | LSTM Lead             | LSTM baseline                   |
+| @alina2002200 Alina | ODE Lead              | Neural ODE module               |
 | @rainbowbrained  | Data & MLOps  | Dataset, CI, sweeps, evaluation |

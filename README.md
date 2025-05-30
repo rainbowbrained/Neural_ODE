@@ -1,104 +1,51 @@
-# Neural_ODE
-DL 2025 team project. Reproducible comparison of continuous‑time Neural ODE models against discrete‑time baselines (ResNet, RNN, LSTM) on irregular time‑series forecasting tasks.
+# Neural ODE 🧩⏱️  
+Reproducible continuous-time deep-learning benchmark. DL 2025 team project. Reproducible comparison of continuous‑time Neural ODE models against discrete‑time baselines (ResNet, RNN, LSTM) on irregular time‑series forecasting tasks.
 
-**Submission Format:** You will need to prepare a repository with the code for your solution and a report/presentation where we can quickly understand what problem you were solving, what difficulties arose, how you approached the solution, and what results you obtained (it is advisable to attach some graphs of losses/quality).
+[![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/) 
+[![PyTorch](https://img.shields.io/badge/PyTorch-2.2-red)](https://pytorch.org/) 
 
-## ✅ Completed Tasks
-1. Generated synthetic dataset: A toy linear ODE system.
-2. Implemented `ODEFunc` class: simple linear transformation of hidden state.
-3. Used `torchdiffeq.odeint` to solve the ODE: predicted state trajectories with initial value problem solver.
-4. Training + visualisation
+Neural ODE compares **continuous-depth models** against classic discrete-time baselines (ResNet-18, GRU, Time-LSTM) on **irregular time-series and vision**.  
+
+## 📊 Results
+| Task / Metric                | ResNet-18   | GRU (Δt) | Time-LSTM  | **Neural ODE** |
+| ---------------------------- | ----------- | -------- | ---------- | -------------- |
+| **MNIST** – Acc ↑            | **99.31 %** | 99.02 %  | 99.23 %    | 99.17 %        |
+|   Params                     | 11.7 M      | 1.2 M    | 11.7 M     | **0.21 M**     |
+|   Latency ↓                  | 11 ms       | 5 ms     | **3 ms**   | 3 ms           |
+| **CIFAR-10** – Acc ↑         | **95.1 %**  | 83.4 %   | 94.8 %     | 74.2 %         |
+|   Latency ↓                  | 12 ms       | 6 ms     | **4 ms**   | 201 ms         |
+| **PhysioNet 2012** – AUROC ↑ | 0.742       | 0.786    | 0.693      | **0.754**      |
+|   Latency ↓                  | 7 ms        | 1.4 ms   | **0.6 ms** | 2.0 ms         |
 
 
-## 🔧 Remaining Tasks
-- Implement and train RNN-based models: Compare with standard RNN, GRU, or LSTM architectures on the same task.
-- Build and evaluate ODE-RNN model: Fuse ODE solver with RNN encoder as in the Latent ODE architecture.
-- Compare performance: Run benchmarks and visualize error metrics vs time steps or noise.
-- Use a richer or real-world dataset: e.g. irregular medical time series, financial time series.
-- Organize project repository: Create structured GitHub repo with README.md, dataset loaders, training scripts.
-- Prepare presentation slides: Explain motivation, theory, models, results, comparison, and conclusions.
-
-
-| **Member / GitHub handle**            | **Primary Deliverables**          | **Detailed Weekly Tasks & Milestones**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| ------------------------------------- | --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **@member1 Dmitry – ResNet**     | *Image/sequence ResNet baseline*  | <br>• Review dataset specs; design ResNet depth/width grid.<br>• Stub `src/models/resnet.py`, forward pass + unit-test.<br><br>• Integrate Lightning Module, add early-stopping & LR-scheduler.<br>• Run first training sweep → baseline metrics on W\&B.<br><br>• Add configurable bottleneck / dilated blocks; ablation script.<br>• Deliver inference-latency profiler notebook.<br><br>• Final tune (≤1 % MSE target); export `resnet.ckpt`, update results table, write ½-page methods subsection.                      |
-| **@member2 Artemiy – RNN (GRU)** | *GRU baseline for irregular Δt*   | • Implement `TimeAwareGRU` (Δt concatenation) in `src/models/rnn.py`.<br>• Unit-test hidden-state reset & masking.<br> • Training loop; log N\_par, FLOPs.<br>• Hyper-opt hidden-units vs seq-length; compare to ResNet.<br> • Document failure modes & lessons-learned slide.                                                                                                                                                                                                                                             |
-| **@member3 Akmuhammed – LSTM**   | *Standard + Time-LSTM baseline*   |• Fork Artemiy’s dataloader; add `TimeLSTM` variant.<br>  • Run same sweeps; capture learning-curve SVGs.<br>• Implement teacher-forcing vs scheduled-sampling toggle.<br> • Provide extrapolation demo GIF + write comparative paragraph.                                                                                                                                                                                                                                                                                  |
-| **@member4 Alina – ODE**         | *Neural ODE / Latent ODE module*  |  • Fork `torchdiffeq`; wrap `ODEBlock` + adjoint tests.<br> • Reproduce paper’s spiral demo; log NFE stats.<br> • Plug into shared trainer; tune solver tolerances vs error.<br>• Add memory-profiling callback.<br> • Stretch: continuous normalising-flow or CNF head.<br>• Prepare “ODE-internals” slide & code walkthrough.                                                                                                                                                                                              |
-| **Anita – Data & MLOps**         | *Dataset, CI, sweeps, evaluation* | • Freeze dataset (data-card.md), write `dataloader.py`.<br>• Set up repo structure, pre-commit, Black/isort, GitHub Actions (lint + unit tests + smoke-train).<br> • Hydra/YAML config schema; W\&B project; Optuna sweep script.<br>• Provide `run.sh --model=<name>` wrapper.<br> • Evaluation notebook: metrics table, paired t-test, NFE curves.<br>• Collect all checkpoints; generate leaderboard CSV.<br>  • Assemble final figures, ensure reproducibility (`docker/`), polish README & deliver 10-min Colab demo. |
+## 🗂️ Datasets
+| Name                   | Domain                   | Samples            | Δt pattern           |
+| ---------------------- | ------------------------ | ------------------ | -------------------- |
+| **PhysioNet ICU 2012** | 41 vital-sign channels   | 8 k patients       | *Highly irregular*   |
+| MNIST / CIFAR-10       | Vision (28×28 / 32×32×3) | 60 k / 50 k images | *Uniform*            |
 
 
 
-____________________________________________________________________
-# README.MD draft
-
----
-
-## ⭐ Project Highlights
-
-* **≤ 1 % error target** (MSE) on chosen dataset
-* Unified experiment engine (Hydra + PyTorch Lightning)
-* End‑to‑end reproducibility: one‑command run, CI smoke test, W\&B tracking
-* Extensible plug‑in interface — drop your `Model` class, rerun, compare
-
----
-
-## 1. Quick Start
-
-```bash
-# clone
-git clone https://github.com/rainbowbrained/Neural_ODE.git
-cd Neural_ODE
-# example run (Neural ODE)
-python train.py model=ode dataset=physionet
-```
-
-*See `configs/` for all options.*
-
----
-
-## 2. Dataset
-
-| Name               | Domain               | Samples           | Δt Characteristics | License |
-| ------------------ | -------------------- | ----------------- | ------------------ | ------- |
-| PhysioNet ICU 2012 | Vital signs (health) | 8 k patients      | Highly irregular   | MIT     |
-| Synthetic Spiral   | Toy                  | 10 k trajectories | Uniform            | MIT     |
-
-Download will auto‑trigger on first run and cache under `data/`.
-
----
-
-## 3. Directory Layout
+##  🏗️ Repository Layout
 
 ```
-├── 1806.07366v5.pdf  # main paper
+├── 1806.07366v5.pdf            # main paper
 │
 ├── DL_NeuralODE.pdf      
 ├── GRU_implementation.ipynb
 ├── LSTM_MNIST_CIFAR-10_PhysioNet.ipynb
-├── NeuralODE.ipynb
-├── ResNet_CIFAR.ipynb
-├── ResNet_MNIST.ipynb
+│
+├── NeuralODE.ipynb            # initial Neural ODE draft
+├── odenet_cifar10_metric.py   # Neural ODE on CIFAR10
+├── odenet_mnist_metric.py     # Neural ODE on MNIST
+├── odenet_physionet.py        # Neural ODE on PhysioNet
+│
+├── ResNet_CIFAR.ipynb        # ResNet on CIFAR
+├── ResNet_MNIST.ipynb        # ResNet on MNIST
 │
 ├── utils.py          
-└── report.pdf        # project defense presentation
+└── report.pdf                # project defense presentation
 ```
-
-
-
-
----
-
-## 4. Training & Evaluation
-
-| Model          | Params | Train NFE | Val MSE ↓ | Inference latency (ms) |
-| -------------- | ------ | --------- | --------- | ---------------------- |
-| ResNet‑18      | 11 M   |  –        |     |                   |
-| GRU            | 1.2 M  |  –        |     |                   |
-| LSTM           | 1.3 M  |  –        |     |                   |
-| **Neural ODE** | 0.8 M  | 57        |     |                   |
-
-*Numbers are placeholders – see `results.csv` for latest.*
 
 ---
 

@@ -49,7 +49,7 @@ Neural ODE compares **continuous-depth models** against classic discrete-time ba
 
 ---
 
-## 5. Team & Roles
+## Team & Roles
 
 | Member       | Role                | Responsibility                  |
 | ------------ | --------------------- | ------------------------------- |

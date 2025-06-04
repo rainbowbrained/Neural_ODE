@@ -1,7 +1,7 @@
 # Neural ODE 🧩⏱️  
 Reproducible continuous-time deep-learning benchmark. DL 2025 team project. Reproducible comparison of continuous‑time Neural ODE models against discrete‑time baselines (ResNet, RNN, LSTM) on irregular time‑series forecasting tasks.
 
-[![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/) 
+[![Python](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://www.python.org/) 
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.2-red)](https://pytorch.org/) 
 
 Neural ODE compares **continuous-depth models** against classic discrete-time baselines (ResNet-18, GRU, Time-LSTM) on **irregular time-series and vision**.  

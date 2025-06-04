@@ -9,13 +9,13 @@ Neural ODE compares **continuous-depth models** against classic discrete-time ba
 ## 📊 Results
 | Task / Metric                | ResNet-18   | GRU (Δt) | Time-LSTM  | **Neural ODE** |
 | ---------------------------- | ----------- | -------- | ---------- | -------------- |
-| **MNIST** – Acc ↑            | **99.31 %** | 99.02 %  | 99.23 %    | 99.17 %        |
+| **MNIST** – Acc ↑            | **99.31 %** | 97.40 %  | 99.23 %    | 99.17 %        |
 |   Params                     | 11.7 M      | 1.2 M    | 11.7 M     | **0.21 M**     |
-|   Latency ↓                  | 11 ms       | 5 ms     | **3 ms**   | 3 ms           |
-| **CIFAR-10** – Acc ↑         | **95.1 %**  | 83.4 %   | 94.8 %     | 74.2 %         |
-|   Latency ↓                  | 12 ms       | 6 ms     | **4 ms**   | 201 ms         |
+|   Latency ↓                  | 11 ms       | 0.49 ms     | **3 ms**   | 3 ms           |
+| **CIFAR-10** – Acc ↑         | **95.1 %**  | 48.70 %   | 94.8 %     | 74.2 %         |
+|   Latency ↓                  | 12 ms       | 0.83 ms     | **4 ms**   | 201 ms         |
 | **PhysioNet 2012** – AUROC ↑ | 0.742       | 0.786    | 0.693      | **0.754**      |
-|   Latency ↓                  | 7 ms        | 1.4 ms   | **0.6 ms** | 2.0 ms         |
+|   Latency ↓                  | 7 ms        | 1.69 ms   | **0.6 ms** | 2.0 ms         |
 
 
 ## 🗂️ Datasets

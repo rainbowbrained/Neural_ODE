@@ -51,7 +51,7 @@ Neural ODE compares **continuous-depth models** against classic discrete-time ba
 
 ## 5. Team & Roles
 
-| Member       | GitHub                | Responsibility                  |
+| Member       | Role                | Responsibility                  |
 | ------------ | --------------------- | ------------------------------- |
 | @dpetrov835 Dmitry | ResNet Lead           | Deep residual baseline          |
 | @Sklaveman Artemiy | RNN Lead              | GRU baseline                    |
